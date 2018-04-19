@@ -5,6 +5,7 @@ $(document).ready(onReady);
 function onReady() {
     console.log('JQuery is here');
     getRecords();
+    $('#submitButton').on('click', addNew);
 }
 
 function getRecords() {
@@ -23,4 +24,27 @@ function getRecords() {
                 <td>${record.cost}</td></tr>`);
         }
     });
+}
+
+function addNew() {
+    const newObject = {};
+    newObject.title = $('#title').val();
+    newObject.artist = $('#artist').val();
+    newObject.year = $('#year').val();
+    newObject.cost = $('#cost').val();
+    console.log(newObject);
+    //AJAX post request
+    $.ajax({
+        method: "POST",
+        url: "/add-record",
+        data: newObject
+    })
+    .then((response) => {
+        console.log(response);
+        $('#recordList').empty();
+        $('#recordTable').empty();
+        getRecords();
+    });
+
+    $('input').val(''); 
 }
