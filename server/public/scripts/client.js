@@ -11,7 +11,7 @@ function onReady() {
 function getRecords() {
     $.ajax({
         method: "GET",
-        url: "/records"
+        url: "/record"
     })
     .then((response) => {
         for(let record of response) {
@@ -36,7 +36,7 @@ function addNew() {
     //AJAX post request
     $.ajax({
         method: "POST",
-        url: "/add-record",
+        url: "/record",
         data: newObject
     })
     .then((response) => {
